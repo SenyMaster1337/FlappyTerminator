@@ -1,19 +1,29 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemySpawner : Spawners.Spawner<Enemy>
 {
+    [SerializeField] private EnemyRemover _enemyRemover;
     [SerializeField] private float _spawnDelay;
 
-    private Coroutine _lifetimeCoroutine;
+    private Coroutine _coroutine;
     private bool _isSpawnerEnabled = true;
     private int _minRandomPositionY = -3;
     private int _maxRandomPositionY = 4;
 
     private void Start()
     {
-        StartCubesSpawnCount();
+        StartEnemiesSpawnCount();
+    }
+
+    private void OnEnable()
+    {
+        _enemyRemover.EnemyCollisionDetected += ReleaseObjectToPool;
+    }
+
+    private void OnDisable()
+    {
+        _enemyRemover.EnemyCollisionDetected -= ReleaseObjectToPool;
     }
 
     public override Enemy CreateFunc()
@@ -23,19 +33,15 @@ public class EnemySpawner : Spawners.Spawner<Enemy>
         return enemy;
     }
 
-    public void PutObject(Enemy Enemy)
-    {
-        Enemy.gameObject.SetActive(false);
-    }
-
     public override void DestroyObject(Enemy enemy)
     {
-        //enemy.ParametersReseted -= ReleaseObjectToPool;
         base.DestroyObject(enemy);
     }
 
     public override void ReleaseObjectToPool(Enemy enemy)
     {
+        enemy.StopCounting();
+        enemy.FlipEnemy(0);
         base.ReleaseObjectToPool(enemy);
     }
 
@@ -43,22 +49,24 @@ public class EnemySpawner : Spawners.Spawner<Enemy>
     {
         int randomPositionY = UnityEngine.Random.Range(_minRandomPositionY, _maxRandomPositionY);
 
-        enemy.transform.position = new Vector3(transform.position.x + 5, randomPositionY, transform.position.z);
-
-        enemy.FlipEnemy();
-
         base.ChangeParameters(enemy);
+
+        enemy.transform.position = new Vector3(transform.position.x, randomPositionY, transform.position.z);
+
+        enemy.FlipEnemy(180);
+
+        enemy.StartCounting();
     }
 
-    private void StartCubesSpawnCount()
+    private void StartEnemiesSpawnCount()
     {
-        if (_lifetimeCoroutine != null)
-            StopCoroutine(_lifetimeCoroutine);
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
 
-        _lifetimeCoroutine = StartCoroutine(CountCubesSpawn());
+        _coroutine = StartCoroutine(CountEnemiesSpawn());
     }
 
-    private IEnumerator CountCubesSpawn()
+    private IEnumerator CountEnemiesSpawn()
     {
         var wait = new WaitForSeconds(_spawnDelay);
 

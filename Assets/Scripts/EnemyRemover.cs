@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.Pool;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class EnemyRemover : MonoBehaviour
 {
-    [SerializeField] private EnemySpawner _spawner;
-
     private BoxCollider2D _boxCollider;
+
+    public event Action<Enemy> EnemyCollisionDetected;
 
     private void Awake()
     {
@@ -24,8 +22,7 @@ public class EnemyRemover : MonoBehaviour
     {
         if (other.TryGetComponent(out Enemy enemy))
         {
-            //_spawner.ReleaseObjectToPool(enemy);
-            _spawner.PutObject(enemy);
+            EnemyCollisionDetected?.Invoke(enemy);
         }
     }
 }

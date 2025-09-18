@@ -157,9 +157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb01012cc6e5b4b40bfdc55839a64bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 3920859692146528532, guid: e71da87b4e1a6ef48b2531068e4a1138, type: 3}
+  Prefab: {fileID: 7096695695177928218, guid: ea6c48582a358384b898986e5afb416e, type: 3}
   _poolCapacity: 10
   _poolMaxSize: 10
+  _enemyRemover: {fileID: 1067506491}
   _spawnDelay: 2
 --- !u!4 &431721688
 Transform:
@@ -169,7 +170,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431721686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.89, y: -0.41, z: 6.708834}
+  m_LocalPosition: {x: 2.62, y: -0.09, z: 6.708834}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -341,8 +342,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1000415089}
-  - {fileID: 431721688}
   - {fileID: 1067506490}
+  - {fileID: 431721688}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -803,7 +804,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad22d5902ba65f41864c6fd6e659538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 431721687}
 --- !u!61 &1067506492
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -944,7 +944,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _firePoint: {fileID: 1064121846}
   _bulletPrefab: {fileID: 3343493090432990415, guid: 5497859baf52fbc4bb324283b76efb86, type: 3}
-  _timeCooldown: 0.2
 --- !u!1001 &1693144217
 PrefabInstance:
   m_ObjectHideFlags: 0

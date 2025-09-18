@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class Flipper : MonoBehaviour
 {
-    public void Flip(Transform transform)
+    private Quaternion _rotation;
+
+    public void Flip(Transform transform, int rotationValue)
     {
-        transform.Rotate(0, 180, 0);
+        _rotation.y = rotationValue;
+        transform.rotation = _rotation;
     }
 }

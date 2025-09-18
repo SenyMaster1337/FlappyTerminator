@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,12 +13,4 @@ public class EnemyPool : MonoBehaviour
     {
         _pool = new Queue<Enemy>();
     }
-
-    //public Enemy GetObject()
-    //{
-    //    if (_pool.Count == 0)
-    //    {
-
-    //    }
-    //}
 }
