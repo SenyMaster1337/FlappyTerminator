@@ -6,7 +6,7 @@ public class BirdCollisionHandler : MonoBehaviour
 {
     private CircleCollider2D _circleCollider;
 
-    public event Action GroundCollisionDetected;
+    public event Action OnCollisionDetected;
 
     private void Awake()
     {
@@ -20,9 +20,9 @@ public class BirdCollisionHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Ground ground))
+        if(other.TryGetComponent(out Bullet bullet) || other.TryGetComponent(out Ground ground))
         {
-            GroundCollisionDetected?.Invoke();
+            OnCollisionDetected?.Invoke();
         }
     }
 }

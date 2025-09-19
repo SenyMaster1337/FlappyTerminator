@@ -10,6 +10,8 @@ public class EnemySpawner : Spawners.Spawner<Enemy>
     private bool _isSpawnerEnabled = true;
     private int _minRandomPositionY = -3;
     private int _maxRandomPositionY = 4;
+    private int _rotationValueRight = 0;
+    private int _rotationValueleft = 180;
 
     private void Start()
     {
@@ -33,15 +35,10 @@ public class EnemySpawner : Spawners.Spawner<Enemy>
         return enemy;
     }
 
-    public override void DestroyObject(Enemy enemy)
-    {
-        base.DestroyObject(enemy);
-    }
-
     public override void ReleaseObjectToPool(Enemy enemy)
     {
-        enemy.StopCounting();
-        enemy.FlipEnemy(0);
+        enemy.StopShoot();
+        enemy.FlipEnemy(_rotationValueRight);
         base.ReleaseObjectToPool(enemy);
     }
 
@@ -53,9 +50,9 @@ public class EnemySpawner : Spawners.Spawner<Enemy>
 
         enemy.transform.position = new Vector3(transform.position.x, randomPositionY, transform.position.z);
 
-        enemy.FlipEnemy(180);
+        enemy.FlipEnemy(_rotationValueleft);
 
-        enemy.StartCounting();
+        enemy.Shoot();
     }
 
     private void StartEnemiesSpawnCount()

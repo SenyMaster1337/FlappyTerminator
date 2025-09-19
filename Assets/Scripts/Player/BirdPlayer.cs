@@ -20,12 +20,12 @@ public class BirdPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        _birdCollisionHandler.GroundCollisionDetected += ProcessCollision;
+        _birdCollisionHandler.OnCollisionDetected += ProcessCollision;
     }
 
     private void OnDisable()
     {
-        _birdCollisionHandler.GroundCollisionDetected -= ProcessCollision;
+        _birdCollisionHandler.OnCollisionDetected -= ProcessCollision;
     }
 
     private void Start()
@@ -42,8 +42,10 @@ public class BirdPlayer : MonoBehaviour
 
         _birdMover.TranslateRotation();
 
-        if(_inputReader.IsAttackButtonClicked)
-            _weapon.Shoot();
+        if (_inputReader.IsAttackButtonClicked)
+        {
+            _weapon.OneShoot();
+        }
     }
 
     private void ProcessCollision()

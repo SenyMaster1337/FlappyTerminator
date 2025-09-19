@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -9,13 +10,14 @@ namespace Spawners
         [SerializeField] private int _poolCapacity;
         [SerializeField] private int _poolMaxSize;
 
-        private ObjectPool<T> _objectPool;
+        protected ObjectPool<T> ObjectPool;
+        protected List<T> ActiveObjects = new List<T>();
 
         protected int CreatedObjectCount = 0;
 
         private void Awake()
         {
-            _objectPool = new ObjectPool<T>
+            ObjectPool = new ObjectPool<T>
                 (
                 createFunc: () => CreateFunc(),
                 actionOnGet: (@object) => ChangeParameters(@object),
@@ -36,17 +38,29 @@ namespace Spawners
 
         public virtual void ReleaseObjectToPool(T @object)
         {
-            _objectPool.Release(@object);
+            ObjectPool.Release(@object);
+            ActiveObjects.Remove(@object);
         }
 
         public virtual void ChangeParameters(T @object)
         {
             @object.gameObject.SetActive(true);
+            ActiveObjects.Add(@object);
         }
 
         public void SpawnObject()
         {
-            _objectPool.Get();
+            ObjectPool.Get();
+        }
+
+        public void ReleaseAllObjectsToPool()
+        {
+            foreach (var obj in ActiveObjects)
+            {
+                ObjectPool.Release(obj);
+            }
+
+            ActiveObjects.Clear();
         }
     }
 }
