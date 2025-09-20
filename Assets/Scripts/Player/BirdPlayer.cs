@@ -7,7 +7,7 @@ public class BirdPlayer : MonoBehaviour
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private BirdMover _birdMover;
     [SerializeField] private BirdCollisionHandler _birdCollisionHandler;
-    [SerializeField] private Weapon _weapon;
+    [SerializeField] private PlayerShooter _playerShooter;
 
     private Rigidbody2D _rigidbody;
 
@@ -44,7 +44,7 @@ public class BirdPlayer : MonoBehaviour
 
         if (_inputReader.IsAttackButtonClicked)
         {
-            _weapon.OneShoot();
+            _playerShooter.ShootOnce();
         }
     }
 

@@ -1,38 +1,48 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Weapon _weapon;
+    [SerializeField] private EnemyShooter _enemyShooter;
+    [SerializeField] private EnemyCollisionHandler _enemyCollisionHandler;
     [SerializeField] private Flipper _flipper;
     [SerializeField] private Transform _transformSpriteRenderer;
     [SerializeField] private float _spawnBulletDelay;
 
-    private CircleCollider2D _circleCollider;
+    private EnemySpawner _enemySpawner;
 
-    private void Awake()
+    public void Init(EnemySpawner enemySpawner)
     {
-        _circleCollider = GetComponent<CircleCollider2D>();
+        _enemySpawner = enemySpawner;
+    }
 
-        if (_circleCollider != null)
-        {
-            _circleCollider.isTrigger = true;
-        }
+    private void OnEnable()
+    {
+        _enemyCollisionHandler.OnCollisionDetected += ProcessCollision;
+    }
+
+    private void OnDisable()
+    {
+        _enemyCollisionHandler.OnCollisionDetected -= ProcessCollision;
     }
 
     public void Shoot()
     {
-        _weapon.StartShooting();
+        _enemyShooter.StartShooting();
     }
 
     public void StopShoot()
     {
-        _weapon.StopShooting();
+        _enemyShooter.StopShooting();
     }
 
     public void FlipEnemy(int rotationValue)
     {
         _flipper.Flip(_transformSpriteRenderer, rotationValue);
+    }
+
+    private void ProcessCollision()
+    {
+        _enemySpawner.ReleaseObjectToPool(this);
     }
 }

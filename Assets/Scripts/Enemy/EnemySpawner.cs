@@ -31,6 +31,7 @@ public class EnemySpawner : Spawners.Spawner<Enemy>
     public override Enemy CreateFunc()
     {
         Enemy enemy = Instantiate(Prefab);
+        enemy.Init(this);
 
         return enemy;
     }

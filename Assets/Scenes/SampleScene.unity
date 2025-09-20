@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb01012cc6e5b4b40bfdc55839a64bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 3098718107694387418, guid: b8e4f20d30d876445a2a343bb6c70e36, type: 3}
+  Prefab: {fileID: 3193557860017453053, guid: 6bcf322a9074dfb4d82230895664075f, type: 3}
   _poolCapacity: 10
   _poolMaxSize: 10
   _enemyRemover: {fileID: 1067506491}
@@ -496,7 +496,6 @@ GameObject:
   m_Component:
   - component: {fileID: 673248860}
   - component: {fileID: 673248861}
-  - component: {fileID: 673248864}
   - component: {fileID: 673248863}
   m_Layer: 0
   m_Name: Bird
@@ -569,42 +568,7 @@ MonoBehaviour:
   _inputReader: {fileID: 1026589408}
   _birdMover: {fileID: 1409656392}
   _birdCollisionHandler: {fileID: 1042814734}
-  _weapon: {fileID: 1642951969}
---- !u!58 &673248864
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673248858}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  _playerShooter: {fileID: 1642951969}
 --- !u!1 &711144222
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,7 +879,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064121844}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.448, y: -0.488, z: 1.3658423}
+  m_LocalPosition: {x: 2.07, y: -0.78, z: 1.3658423}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1188,14 +1152,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1642951967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2954b19b5ac2c7544b9afc858e7dd7c7, type: 3}
+  m_Script: {fileID: 11500000, guid: e761381558b6014489bae71e9c2b80a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 3343493090432990415, guid: 5497859baf52fbc4bb324283b76efb86, type: 3}
-  _poolCapacity: 3
-  _poolMaxSize: 3
-  _firePoint: {fileID: 1064121846}
-  _spawnBulletDelay: 0.3
+  _poolCapacity: 10
+  _poolMaxSize: 10
+  FirePoint: {fileID: 1064121846}
+  SpawnBulletDelay: 0.3
 --- !u!1001 &1693144217
 PrefabInstance:
   m_ObjectHideFlags: 0
