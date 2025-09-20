@@ -15,6 +15,12 @@ public class PlayerShooter : BulletSpawner
         }
     }
 
+    public override void ChangeParameters(Bullet bullet)
+    {
+        base.ChangeParameters(bullet);
+        bullet.Init(_directionRight);
+    }
+
     private void StartActivateCooldown()
     {
         if (_coroutine != null)
@@ -30,12 +36,6 @@ public class PlayerShooter : BulletSpawner
         yield return new WaitForSeconds(SpawnBulletDelay);
 
         _isOnCooldown = false;
-    }
-
-    public override void ChangeParameters(Bullet bullet)
-    {
-        base.ChangeParameters(bullet);
-        bullet.Init(_directionRight);
     }
 }
 

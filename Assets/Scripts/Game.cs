@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -8,23 +7,23 @@ public class Game : MonoBehaviour
     [SerializeField] private StartScreen _startScreen;
     [SerializeField] private EndGameScreen _endGameScreen;
 
+    private void Awake()
+    {
+        Time.timeScale = 0;
+    }
+
     private void OnEnable()
     {
         _startScreen.OnButtonClicked += OnPlayButtonClick;
         _endGameScreen.OnButtonClicked += OnRestartButtonClick;
-        _bird.GameOver += OnGameOver;
+        _bird.MainCharacterDied += OnGameOver;
     }
 
     private void OnDisable()
     {
         _startScreen.OnButtonClicked -= OnPlayButtonClick;
         _endGameScreen.OnButtonClicked -= OnRestartButtonClick;
-        _bird.GameOver -= OnGameOver;
-    }
-
-    private void Awake()
-    {
-        Time.timeScale = 0;
+        _bird.MainCharacterDied -= OnGameOver;
     }
 
     private void Start()

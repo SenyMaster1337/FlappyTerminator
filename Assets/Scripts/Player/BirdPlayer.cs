@@ -11,7 +11,12 @@ public class BirdPlayer : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
 
-    public event Action GameOver;
+    public event Action MainCharacterDied;
+
+    public void Reset()
+    {
+        _birdMover.Reset();
+    }
 
     private void Awake()
     {
@@ -50,11 +55,6 @@ public class BirdPlayer : MonoBehaviour
 
     private void ProcessCollision()
     {
-        GameOver?.Invoke();
-    }
-
-    public void Reset()
-    {
-        _birdMover.Reset();
+        MainCharacterDied?.Invoke();
     }
 }

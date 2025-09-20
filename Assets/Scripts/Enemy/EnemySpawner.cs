@@ -15,7 +15,7 @@ public class EnemySpawner : Spawners.Spawner<Enemy>
 
     private void Start()
     {
-        StartEnemiesSpawnCount();
+        StartEnemiesSpawn();
     }
 
     private void OnEnable()
@@ -56,15 +56,15 @@ public class EnemySpawner : Spawners.Spawner<Enemy>
         enemy.Shoot();
     }
 
-    private void StartEnemiesSpawnCount()
+    private void StartEnemiesSpawn()
     {
         if (_coroutine != null)
             StopCoroutine(_coroutine);
 
-        _coroutine = StartCoroutine(CountEnemiesSpawn());
+        _coroutine = StartCoroutine(SpawnEnemies());
     }
 
-    private IEnumerator CountEnemiesSpawn()
+    private IEnumerator SpawnEnemies()
     {
         var wait = new WaitForSeconds(_spawnDelay);
 

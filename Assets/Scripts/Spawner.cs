@@ -13,8 +13,6 @@ namespace Spawners
         protected ObjectPool<T> ObjectPool;
         protected List<T> ActiveObjects = new List<T>();
 
-        protected int CreatedObjectCount = 0;
-
         private void Awake()
         {
             ObjectPool = new ObjectPool<T>
